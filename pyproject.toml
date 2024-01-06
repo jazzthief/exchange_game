@@ -8,7 +8,11 @@ packages = [{include = "exchange_game", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pygame = "^2.5.2"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.0"
 
 [build-system]
 requires = ["poetry-core"]
