@@ -16,5 +16,7 @@ ignore = [
     "C901",  # too complex
 ]
 
+line-length = 120
+
 [per-file-ignores]
 "" = ["E712"]  # add paths to modules using sqlalchemy queries
