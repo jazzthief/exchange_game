@@ -1,5 +1,5 @@
+from src.config import get_app_config
 from src.engine.app import App
-from src.engine.config import get_app_config
 
 
 def launch() -> None:
@@ -7,3 +7,7 @@ def launch() -> None:
     app = App(app_config)
 
     app.run()
+
+
+if __name__ == "__main__":
+    launch()
