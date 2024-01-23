@@ -1,8 +1,25 @@
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
 from enum import StrEnum
 from logging import getLogger
 
 # TODO: create higher level logger & share config
 logger = getLogger(__name__)
+
+
+class StatusEffect(ABC):
+    def __init__(
+        self,
+        affected_unit: Unit,
+        duration_left: int,
+    ) -> None:
+        self._affected_unit = affected_unit
+        self.duration_left = duration_left
+
+    @abstractmethod
+    def apply(self) -> None:
+        ...
 
 
 class AttackType(StrEnum):
@@ -26,6 +43,7 @@ class Unit:
         attack_type: AttackType = AttackType.PHYSICAL,
         attack_targets: int = 1,
         prefix: str | None = None,
+        statuses: list[StatusEffect] = None,
     ) -> None:
         # TODO: active abilities
         self.name = name
@@ -63,6 +81,35 @@ class Hero(Unit):
         # TODO: inventory
         self.level = level
 
+        super().__init__(
+            name=name,
+            health=health,
+            armor=armor,
+            resistance=resistance,
+            attack_dmg=attack_dmg,
+            attack_type=attack_type,
+            attack_range=attack_range,
+            attack_targets=attack_targets,
+            initiative=initiative,
+            prefix=prefix,
+        )
+
+
+class NPC(Unit):
+    def __init__(
+        self,
+        name: str,
+        health: int,
+        armor: int,
+        resistance: int,
+        attack_dmg: int,
+        attack_range: int,
+        initiative: int,
+        attack_type: AttackType = AttackType.PHYSICAL,
+        attack_targets: int = 1,
+        prefix: str | None = None,
+        level: int = 1,
+    ) -> None:
         super().__init__(
             name=name,
             health=health,
